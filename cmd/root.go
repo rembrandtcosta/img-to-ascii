@@ -7,9 +7,9 @@ import (
 	"os"
 
 	"image/color"
-	_ "image/png"
-	_ "image/jpeg"
 	_ "image/gif"
+	_ "image/jpeg"
+	_ "image/png"
 
 	"github.com/disintegration/imaging"
 	"github.com/spf13/cobra"
@@ -17,16 +17,16 @@ import (
 
 var (
 	asciiGreyScale = " .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
-	width = 0
-	height = 0
+	width          = 0
+	height         = 0
 )
 
 var rootCmd = &cobra.Command{
-	Use: "img-to-ascii",
+	Use:   "img-to-ascii",
 	Short: "generate ascii art from image files",
-	Long: "generate ascii art from image files",
+	Long:  "generate ascii art from image files",
 	Run: func(cmd *cobra.Command, args []string) {
-		printAscii(args[0])	
+		printAscii(args[0])
 	},
 }
 
@@ -39,14 +39,13 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().IntVarP(&width, "width", "W", 0, "Set width in characters")
-        rootCmd.PersistentFlags().IntVarP(&height, "height", "H", 0, "Set height in characters")
+	rootCmd.PersistentFlags().IntVarP(&height, "height", "H", 0, "Set height in characters")
 }
-
 
 func printAscii(imagePath string) {
 	reader, err := os.Open(imagePath)
 	if err != nil {
-		log.Fatal(err);
+		log.Fatal(err)
 	}
 	defer reader.Close()
 
@@ -56,8 +55,8 @@ func printAscii(imagePath string) {
 	}
 
 	if width == 0 && height == 0 {
-		width = m.Bounds().Dx();
-		height = m.Bounds().Dy();
+		width = m.Bounds().Dx()
+		height = m.Bounds().Dy()
 	} else {
 		imgWidth := float64(m.Bounds().Dx())
 		imgHeight := float64(m.Bounds().Dy())
@@ -89,7 +88,7 @@ func printAscii(imagePath string) {
 
 	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
 		for x := bounds.Min.X; x < bounds.Max.X; x++ {
-			charDepth := imgSet[y][x]/257
+			charDepth := imgSet[y][x] / 257
 			idxF := float64(charDepth) / 255.0 * float64(len(asciiGreyScale))
 			if charDepth == 255 {
 				idxF = float64(len(asciiGreyScale) - 1)
