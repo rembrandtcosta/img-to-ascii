@@ -53,6 +53,24 @@ func printAscii(imagePath string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	if width == 0 && height == 0 {
+		width = m.Bounds().Dx();
+		height = m.Bounds().Dy();
+	} else {
+		imgWidth := float64(m.Bounds().Dx())
+		imgHeight := float64(m.Bounds().Dy())
+		aspectRatio := imgWidth / imgHeight
+
+		if width == 0 {
+			width = int(float64(height) / aspectRatio)
+			width = int(2 * float64(height))
+		} else if height == 0 {
+			height = int(float64(width) / aspectRatio)
+			height = int(0.5 * float64(height))
+		}
+	}
+
 	m = imaging.Resize(m, width, height, imaging.Lanczos)
 	bounds := m.Bounds()
 
