@@ -1,4 +1,4 @@
-#img-to-ascii
+# img-to-ascii
 
  Converts image files into ascii art 
 
@@ -15,4 +15,3 @@ Flags:
   -h, --help         help for img-to-ascii
   -W, --width int    Set width in characters
 ```
-
