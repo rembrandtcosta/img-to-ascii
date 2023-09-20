@@ -9,6 +9,7 @@ import (
 	"image/color"
 	_ "image/png"
 	_ "image/jpeg"
+	_ "image/gif"
 
 	"github.com/disintegration/imaging"
 	"github.com/spf13/cobra"

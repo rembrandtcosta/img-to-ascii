@@ -18,3 +18,5 @@ go.work
 
 *.jpg
 *.png
+
+img-to-ascii
